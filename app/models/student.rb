@@ -1,16 +1,11 @@
-require_relative '../../db/config'
-
 class Student < ActiveRecord::Base
-# implement your Student model here
-	include ActiveModel::Validations
-
-	attr_accessor :email, :birthday, :phone
+	has_many :subjects
+	has_many :teachers, through: :subjects
 
 	validates :email, 
 			   		:presence => true, 
-			  		:uniqueness => { :case_sensitive => false },
+			  		:uniqueness => true,
 			  		:format => {with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]{2,}+\z/, message: 'is not a valid email address'}
-
 
 	validate :age_limit,
 						:min_phone_numbers
@@ -29,10 +24,18 @@ class Student < ActiveRecord::Base
 		return age
 	end
 
+	def self.get_teacher
+		students = Student.all
+		students.each do |student|
+			student.teacher_id = rand(3..12)
+			student.save
+		end
+	end
+
 	private
 
 	def age_limit
-		if self.birthday.year >= Date.today.year - 5
+		if self.age < 5
 			errors.add(:birthday, 'must be at least 5 years old.')
 		end
 	end
@@ -47,15 +50,3 @@ class Student < ActiveRecord::Base
 	end
 
 end
-
-# p Student.all
-# p student = Student.first
-# p student.name
-# p student.birthday.year
-# p student.birthday.month
-# p Time.now.month
-# p student.age
-
-# p student = Student.first
-# p student.phone
-# p student.min_phone_numbers

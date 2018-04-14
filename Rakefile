@@ -30,7 +30,16 @@ end
 
 desc "populate the teachers database with sample data"
 task "db:populate_teacher" do
-  # Create some teachers for your teachers table in database
+  Teacher.create(first_name: 'John', last_name: 'Lee', email: 'john.lee@example.com', phone: '00 000 000 000')
+  Teacher.create(first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', phone: '00 111 000 000')
+  Teacher.create(first_name: 'Jane', last_name: 'Doe', email: 'jane.doe@example.com', phone: '00 000 111 000')
+  Teacher.create(first_name: 'Angie', last_name: 'JoLee', email: 'angie.jolee@example.com', phone: '00 000 000 111')
+  Teacher.create(first_name: 'Scarly', last_name: 'Johansburg', email: 'scarly.johansburg@example.com', phone: '00 222 000 000')
+  Teacher.create(first_name: 'Christopher', last_name: 'Heavens', email: 'chris.heavens@example.com', phone: '00 000 222 000')
+  Teacher.create(first_name: 'Makan', last_name: 'Kangkung', email: 'kangkung.lover@example.com', phone: '00 000 000 222')
+  Teacher.create(first_name: 'Tony', last_name: 'Chopper', email: 'chop.chop@example.com', phone: '00 333 000 000')
+  Teacher.create(first_name: 'Father', last_name: 'Darth', email: 'darth.vader@example.com', phone: '00 000 333 000')
+  Teacher.create(first_name: 'Effin', last_name: 'Logee', email: 'effin.logy@example.com', phone: '00 000 000 333')
 end
 
 desc 'Retrieves the current schema version number'
